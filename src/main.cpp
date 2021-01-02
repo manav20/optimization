@@ -30,7 +30,6 @@ int main(int argc, char** argv) {
     double x_1 = atof(argv[2]);
     double x_2 = atof(argv[3]);
     double max_iter = atof(argv[4]);
-
     
     std::cout << "User Entry \n";
     std::cout << "Algorithm Choice: " << algo_choice << '\n';
