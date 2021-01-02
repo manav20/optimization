@@ -36,22 +36,6 @@ optimization.hpp
 vector
 -
 
-/home/manav/code/C++/projects/optimization/src/optimization.cpp
-iostream
--
-vector
--
-iomanip
--
-line_search.hpp
-/home/manav/code/C++/projects/optimization/src/line_search.hpp
-cost_function.hpp
-/home/manav/code/C++/projects/optimization/src/cost_function.hpp
-optimization.hpp
-/home/manav/code/C++/projects/optimization/src/optimization.hpp
-math_function.hpp
-/home/manav/code/C++/projects/optimization/src/math_function.hpp
-
 /home/manav/code/C++/projects/optimization/src/optimization.hpp
 vector
 -
