@@ -22,6 +22,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 #include "line_search.hpp"
 #include "cost_function.hpp"
@@ -52,9 +53,10 @@ bool Opt::CheckStop(const double& iter_no, const vector<double>& gradient) {
 }   
 
 
-void Opt::DisplayIteration(double iter_no, double x_1, double x_2, double step_size) const {
+void Opt::IterationData(const double iter_no, const double x_1, const double x_2, const double step_size, ofstream& myfile) {
     cout.precision(20);
     cout << iter_no << '\t' <<  x_1 << '\t' << x_2  << '\t' << rosenb_f({x_1, x_2}) << '\t' << step_size << '\n';
+    myfile << setprecision(20) << iter_no << '\t' << x_1 << '\t' << x_2 << '\t' << rosenb_f({x_1, x_2}) << '\t' << step_size << '\n';
 }
 
 vector<double> Opt::newton(const vector<double>& x0, const vector<double>& gradient) {
@@ -75,11 +77,15 @@ vector<double> Opt::steep_desc(const vector<double>& gradient) {
 
 
 void Opt::optimize(const vector<double>& x0, const string& algorithm_choice) {
-    double iter_no = 0;
+    double iter_no = 1;
     double x_curr_1, x_curr_2;
     vector<double> direction(2, 0);
     double x_new_1 = x0[0], x_new_2 = x0[1];
-   
+    
+    string file_location = "../data/" + algorithm_choice + ".txt";
+    ofstream myfile;
+    myfile.open(file_location);
+
     while(iter_no++) {
         x_curr_1 = x_new_1;
         x_curr_2 = x_new_2;
@@ -92,9 +98,10 @@ void Opt::optimize(const vector<double>& x0, const string& algorithm_choice) {
         x_new_1 = x_curr_1 + alpha*direction[0];
         x_new_2 = x_curr_2 + alpha*direction[1];
         double step_size = alpha*norm(gradient);
-        DisplayIteration(iter_no, x_new_1, x_new_2, step_size);
+        IterationData(iter_no, x_new_1, x_new_2, step_size, myfile);
         if (CheckStop(iter_no, gradient))  break;
-    }   
+    }
+    myfile.close();
 }
 
 
